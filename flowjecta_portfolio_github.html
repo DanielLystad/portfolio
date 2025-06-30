@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Flowjecta AI Automation</title>
+    <meta name="description" content="See Flowjecta's AI automation solutions in action. Real client projects showing ROI and business transformation.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Animated Background - EXACT SAME AS ORIGINAL */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Floating particles - EXACT SAME AS ORIGINAL */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(100, 126, 234, 0.6);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
+        }
+        
+        /* Header - EXACT SAME AS ORIGINAL */
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .header-scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            padding: 0.5rem 0;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            height: 40px;
+        }
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .header-scrolled .logo img {
+            height: 35px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: white;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section - EXACT SAME AS ORIGINAL */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes textGlow {
+            from { text-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            to { text-shadow: 0 0 30px rgba(118, 75, 162, 0.8); }
+        }
+        
+        .hero .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        
+        /* Filter Navigation - TECH STACK STYLE */
+        .filter-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 4rem 0;
+            animation: fadeInUp 1s ease 0.6s both;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            font-weight: 500;
+            min-width: 120px;
+            font-size: 0.9rem;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            transform: translateY(-10px);
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+        
+        /* Portfolio Section - SERVICES STYLE */
+        .portfolio-section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .portfolio-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .portfolio-card:hover {
+            transform: translateY(-15px);
+            background: rgba(102, 126, 234, 0.05);
+            border-color: rgba(102, 126, 234, 0.2);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.1);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .portfolio-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        /* Video Thumbnail */
+        .video-thumb {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            background: #000;
+            border-radius: 20px 20px 0 0;
+            overflow: hidden;
+        }
+        
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            animation: bounce 2s infinite;
+        }
+        
+        .video-placeholder .icon {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .video-placeholder .text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-card:hover .play-overlay {
+            opacity: 1;
+        }
+        
+        .play-btn {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.1);
+            background: white;
+        }
+        
+        /* Card Content */
+        .card-content {
+            padding: 2.5rem;
+        }
+        
+        .portfolio-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #667eea;
+        }
+        
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1rem;
+        }
+        
+        .card-content p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        /* ROI Stats - MINI VERSION */
+        .roi-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .roi-stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .roi-number {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .roi-label {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 0.2rem;
+        }
+        
+        /* Tech Tags */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tech-tag {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.9s both;
+            margin-top: 2rem;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        footer p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .filter-nav {
+                gap: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                min-width: 200px;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+            
+            .roi-stats {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .roi-stat {
+                padding: 0.8rem;
+            }
+        }
+        
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <nav class="container">
+            <div class="logo">
+                <img src="flowjecta-logo.png" alt="Flowjecta Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="https://flowjecta.com">Home</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="https://flowjecta.com#services">Services</a></li>
+                <li><a href="https://flowjecta.com#about">About</a></li>
+                <li><a href="https://flowjecta.com#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>AI Portfolio</h1>
+                <p class="subtitle">Real Projects. Real Results. Real ROI.</p>
+                
+                <div class="filter-nav">
+                    <div class="filter-btn active" data-filter="all">
+                        <div>📊</div>
+                        <div>All Projects</div>
+                    </div>
+                    <div class="filter-btn" data-filter="ai-workflows">
+                        <div>🤖</div>
+                        <div>AI Workflows</div>
+                    </div>
+                    <div class="filter-btn" data-filter="rpa">
+                        <div>🖥️</div>
+                        <div>Desktop RPA</div>
+                    </div>
+                    <div class="filter-btn" data-filter="document-ai">
+                        <div>📋</div>
+                        <div>Document AI</div>
+                    </div>
+                    <div class="filter-btn" data-filter="chatbots">
+                        <div>💬</div>
+                        <div>AI Assistants</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="container">
+            <h2 class="section-title">Client Success Stories</h2>
+            
+            <div class="portfolio-grid">
+                
+                <!-- Project 1: Invoice Processing -->
+                <a href="projects/invoice-automation.html" class="portfolio-card fade-in" data-category="ai-workflows">
+                    <div class="video-thumb">
+                        <div class="video-placeholder">
+                            <div class="icon">🧾</div>
+                            <div class="text">Invoice Processing Demo</div>
+                        </div>
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Smart Invoice Processing</h3>
+                        <div class="card-subtitle">Manufacturing Company • 3 weeks delivery</div>
+                        <p>Automated invoice processing using AI document extraction and approval workflows. Eliminated manual data entry and reduced processing time by 95%.</p>
+                        
+                        <div class="roi-stats">
+                            <div class="roi-stat">
+                                <span class="roi-number">95%</span>
+                                <span class="roi-label">Time Saved</span>
+                            </div>
+                            <div class="roi-stat">
+                                <span class="roi-number">500+</span>
+                                <span class="roi-label">Invoices/Month</span>
+                            </div>
+                            <div class="roi-stat">
+                                <span class="roi-number">$18k</span>
+                                <span class="roi-label">Annual Savings</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-tags">
+                            <span class="tech-tag">Power Automate</span>
+                            <span class="tech-tag">AI Builder</span>
+                            <span class="tech-tag">SharePoint</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 2: HR Chatbot -->
+                <a href="projects/hr-chatbot.html" class="portfolio-card fade-in" data-category="chatbots">
+                    <div class="video-thumb">
+                        <div class="video-placeholder">
+                            <div class="icon">🤖</div>
+                            <div class="text">HR Assistant Demo</div>
+                        </div>
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>AI HR Policy Assistant</h3>
+                        <div class="card-subtitle">Tech Startup • 2 weeks delivery</div>
+                        <p>Custom AI chatbot that answers employee questions about policies, benefits, and procedures. Integrated with company knowledge base for accurate responses.</p>
+                        
+                        <div class="roi-stats">
+                            <div class="roi-stat">
+                                <span class="roi-number">85%</span>
+                                <span class="roi-label">Questions Resolved</span>
+                            </div>
+                            <div class="roi-stat">
+                                <span class="roi-number">24/7</span>
+                                <span class="roi-label">Availability</span>
+                            </div>
+                            <div class="roi-stat">
+                                <span class="roi-number">200+</span>
+                                <span class="roi-label">Employees</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-tags">
+                            <span class="tech-tag">OpenAI GPT-4</span>
+                            <span class="tech-tag">Microsoft Teams</span>
+                            <span class="tech-tag">SharePoint</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 3: Legacy Integration -->
+                <a href="projects/legacy-integration.html" class="portfolio-card fade-in" data-category="rpa">
+                    <div class="video-thumb">
+                        <div class="video-placeholder">
+                            <div class="icon">⚙️</div>
+                            <div class="text">System Integration Demo</div>
+                        </div>
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Legacy System Integration</h3>
+                        <div class="card-subtitle">Healthcare Provider • 4 weeks delivery</div>
+                        <p>Connected outdated patient management system to modern cloud platform using desktop automation and AI data validation.</p>
+                        
+                        <div class="roi-stats">
+                            <div class="roi-stat">
+                                <span class="roi-number">1,200</span>
+                                <span class="roi-label">Records/Day</span>
+                            </div>
+                            <div class="roi-stat">
+                                <span class="roi-number">99.8%</span>
+                                <span class="roi-label">Accuracy</span>
+                            </div>
+                            <div class="roi-stat">
+                                <span class="roi-number">6hrs</span>
+                                <span class="roi-label">Daily Saved</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-tags">
+                            <span class="tech-tag">Power Automate Desktop</span>
+                            <span class="tech-tag">API Integration</span>
+                            <span class="tech-tag">Data Validation</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 4: Contract Analysis -->
+                <a href="projects/contract-analysis.html" class="portfolio-card fade-in" data-category="document-ai">
+                    <div class="video-thumb">
+                        <div class="video-placeholder">
+                            <div class="icon">📄</div>
+                            <div class="text">Contract Analysis Demo</div>
+                        </div>
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>AI Contract Analysis</h3>
+                        <div class="card-subtitle">Legal Firm • 3 weeks delivery</div>
+                        <p>AI-powered contract review that extracts key terms, identifies risks, and generates summary reports automatically from legal documents.</p>
+                        
+                        <div class="roi-stats">
+                            <div class="roi-stat">
+                                <span class="roi-number">75%</span>
+                                <span class="roi-label">Review Time</span>
+                            </div>
+                            <div class="roi-stat">
+                                <span class="roi-number">50+</span>
+                                <span class="roi-label">Contract Types</span>
+                            </div>
+                            <div class="roi-stat">
+                                <span class="roi-number">96%</span>
+                                <span class="roi-label">Accuracy</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-tags">
+                            <span class="tech-tag">Document AI</span>
+                            <span class="tech-tag">Custom Models</span>
+                            <span class="tech-tag">Power BI</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 5: Customer Support -->
+                <a href="projects/customer-support.html" class="portfolio-card fade-in" data-category="ai-workflows">
+                    <div class="video-thumb">
+                        <div class="video-placeholder">
+                            <div class="icon">📧</div>
+                            <div class="text">Support Automation Demo</div>
+                        </div>
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Customer Support Automation</h3>
+                        <div class="card-subtitle">E-commerce • 2.5 weeks delivery</div>
+                        <p>Intelligent email routing and response system that handles customer inquiries automatically with AI-generated, personalized responses.</p>
+                        
+                        <div class="roi-stats">
+                            <div class="roi-stat">
+                                <span class="roi-number">82%</span>
+                                <span class="roi-label">Auto-Resolved</span>
+                            </div>
+                            <div class="roi-stat">
+                                <span class="roi-number">3min</span>
+                                <span class="roi-label">Avg Response</span>
+                            </div>
+                            <div class="roi-stat">
+                                <span class="roi-number">97%</span>
+                                <span class="roi-label">Satisfaction</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-tags">
+                            <span class="tech-tag">OpenAI</span>
+                            <span class="tech-tag">Outlook</span>
+                            <span class="tech-tag">Sentiment Analysis</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 6: Inventory Management -->
+                <a href="projects/inventory-management.html" class="portfolio-card fade-in" data-category="rpa">
+                    <div class="video-thumb">
+                        <div class="video-placeholder">
+                            <div class="icon">📦</div>
+                            <div class="text">Inventory Bot Demo</div>
+                        </div>
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Smart Inventory Management</h3>
+                        <div class="card-subtitle">Retail Chain • 3.5 weeks delivery</div>
+                        <p>Automated inventory tracking across multiple systems with real-time updates, low-stock alerts, and predictive reordering.</p>
+                        
+                        <div class="roi-stats">
+                            <div class="roi-stat">
+                                <span class="roi-number">5,500</span>
+                                <span class="roi-label">Products</span>
+                            </div>
+                            <div class="roi-stat">
+                                <span class="roi-number">4x</span>
+                                <span class="roi-label">Faster Updates</span>
+                            </div>
+                            <div class="roi-stat">
+                                <span class="roi-number">99.5%</span>
+                                <span class="roi-label">Accuracy</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-tags">
+                            <span class="tech-tag">Desktop RPA</span>
+                            <span class="tech-tag">Excel Automation</span>
+                            <span class="tech-tag">Teams Alerts</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="https://flowjecta.com#contact" class="cta-button">Ready to Transform Your Business?</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Flowjecta • Norwegian AI Automation Specialist</p>
+            <p style="margin-top: 0.5rem; opacity: 0.6;">Real projects • Real results • No vendor lock-in</p>
+        </div>
+    </footer>
+
+    <script>
+        
